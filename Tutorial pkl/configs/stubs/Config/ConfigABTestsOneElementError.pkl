@@ -1,0 +1,10 @@
+import "_SharedConfigData.pkl"
+
+output {
+  renderer = new JsonRenderer { omitNullProperties = false }
+}
+
+abtests = _SharedConfigData.configAbtestsWithSaltError
+inapps = _SharedConfigData.configInapps
+monitoring = _SharedConfigData.configMonitoring
+settings = _SharedConfigData.configSettings

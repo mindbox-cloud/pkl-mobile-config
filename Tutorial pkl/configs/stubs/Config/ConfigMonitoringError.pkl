@@ -1,0 +1,10 @@
+import "_SharedConfigData.pkl"
+
+output {
+  renderer = new JsonRenderer { omitNullProperties = false }
+}
+
+inapps = _SharedConfigData.configInapps
+monitoringTest = _SharedConfigData.configMonitoring
+settings = _SharedConfigData.configSettings
+abtests = _SharedConfigData.configAbtests

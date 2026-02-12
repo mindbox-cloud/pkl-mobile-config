@@ -1,0 +1,9 @@
+operations = new Dynamic {
+  viewProductTest { systemName = "ViewProduct" }
+  viewCategory { systemName = "ViewCategory" }
+  setCart { systemName = "SetCart" }
+}
+ttl { inapps = "1.00:00:00" }
+slidingExpiration = new Dynamic {
+  config = "0.00:00:23"
+}

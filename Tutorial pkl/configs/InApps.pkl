@@ -40,10 +40,9 @@ inapps {
             background {
               layers {
                 new {
-                  action {
+                  action = new InAppsTemplate.RedirectUrlAction {
                     intentPayload = "приветик"
                     value = "https://dummyimage.com/100x100/ff0/000.png"
-                    $type = "redirectUrl"
                   }
                   source {
                     value = "https://mobile-static.mindbox.ru/f3d41714973639a3e18788e4b582f451d0952f723ccd9f33092d841bbb9e5b95/aad15fba0585dbde0e8fc6487728a801120a2515eb8b1bd0a16dd6cae01a5e57.jpg"
@@ -160,12 +159,11 @@ inapps {
             background {
               layers {
                 new {
-                  action {
+                  action = new InAppsTemplate.RedirectUrlAction {
                     intentPayload = """
                       {\n"baseUrl": "https: //inapp.local/quiz",\n"contentUrl": "https: //api-staging.mindbox.ru/mobile/byendpoint/webview/quiz.html",\n"$type": "webview",\n"params": {\n    "wizardId": "c5bb173f-10a2-47df-a280-a04cf1ca613d"\n    }\n}
                       """
                     value = ""
-                    $type = "redirectUrl"
                   }
                   source {
                     value = "https://mobile-static.mindbox.ru/f3d41714973639a3e18788e4b582f451d0952f723ccd9f33092d841bbb9e5b95/48d0217513ae3384382ceb2c2f835902b61acc001c0f130421d07ae69d74a72d.jpg"
@@ -241,10 +239,9 @@ inapps {
             background {
               layers {
                 new {
-                  action {
+                  action = new InAppsTemplate.RedirectUrlAction {
                     intentPayload = "123123123"
                     value = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Felis_silvestris_silvestris.jpg/1200px-Felis_silvestris_silvestris.jpg"
-                    $type = "redirectUrl"
                   }
                   source {
                     value = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Felis_silvestris_silvestris.jpg/1200px-Felis_silvestris_silvestris.jpg"

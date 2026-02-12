@@ -108,13 +108,29 @@ class Targeting extends TargetingNode {
   $type: "and"|"or"
 }
 
-// --- Form: Background Layer ---
+/// Matches push notification permission status
+class PushEnabledNode extends TargetingNode {
+  value: Boolean
+  $type: String = "pushEnabled"
+}
 
-class ImageAction {
+// --- Form: Actions ---
+
+open class Action {
   intentPayload: String
-  value: String
   $type: String
 }
+
+class RedirectUrlAction extends Action {
+  value: String
+  $type = "redirectUrl"
+}
+
+class PushPermissionAction extends Action {
+  $type = "pushPermission"
+}
+
+// --- Form: Background Layer ---
 
 class ImageSource {
   value: String
@@ -122,7 +138,7 @@ class ImageSource {
 }
 
 class BackgroundLayer {
-  action: ImageAction
+  action: Action
   source: ImageSource
   $type: String
 }
@@ -159,10 +175,26 @@ class CloseButton {
   $type: String = "closeButton"
 }
 
-// --- Form: Modal Content ---
+// --- Form: Content ---
+
+class Gravity {
+  horizontal: String
+  vertical: String
+}
+
+class ContentPosition {
+  margin: Margin
+  gravity: Gravity
+}
 
 class ModalContent {
   background: Background
+  elements: Listing<CloseButton>
+}
+
+class SnackbarContent {
+  background: Background
+  position: ContentPosition
   elements: Listing<CloseButton>
 }
 
@@ -183,6 +215,14 @@ class SimpleImageVariant extends FormVariant {
   redirectUrl: String
   intentPayload: String
   $type: String = "simpleImage"
+}
+
+class SnackbarVariant extends FormVariant {
+  content: SnackbarContent
+  imageUrl: String
+  redirectUrl: String
+  intentPayload: String
+  $type: String = "snackbar"
 }
 
 // --- Form ---
