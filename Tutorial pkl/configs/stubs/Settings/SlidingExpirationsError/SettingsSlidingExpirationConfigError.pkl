@@ -1,10 +1,12 @@
-operations = new Dynamic {
-  viewProduct { systemName = "ViewProduct" }
-  viewCategory { systemName = "ViewCategory" }
-  setCart { systemName = "SetCart" }
-}
-ttl { inapps = "2.00:00:00" }
-slidingExpiration = new Dynamic {
-  configTest = "2.00:00:00"
-  pushTokenKeepalive = "14.00:00:00"
+import "../_SettingsBase.pkl" as base
+
+output {
+  renderer = new JsonRenderer {}
+  value = base.settings.toMap()
+    .mapValues((key, value) ->
+      if (key == "ttl") new Dynamic { inapps = "2.00:00:00" }
+      else if (key == "slidingExpiration") new Dynamic { configTest = "2.00:00:00"; pushTokenKeepalive = "14.00:00:00" }
+      else value
+    )
+    .toDynamic()
 }

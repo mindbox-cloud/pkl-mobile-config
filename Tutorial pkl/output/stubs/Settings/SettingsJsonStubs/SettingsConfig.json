@@ -1,13 +1,13 @@
 {
   "operations": {
     "viewProduct": {
-      "systemName": "ViewProduct"
+      "systemName": "viewProduct"
     },
     "viewCategory": {
-      "systemName": "ViewCategory"
+      "systemName": "viewCategory"
     },
     "setCart": {
-      "systemName": "SetCart"
+      "systemName": "setCart"
     }
   },
   "ttl": {
@@ -21,5 +21,8 @@
     "maxInappsPerSession": 1,
     "maxInappsPerDay": 1,
     "minIntervalBetweenShows": "0.00:00:10"
+  },
+  "featureToggles": {
+    "MobileSdkShouldSendInAppShowError": false
   }
 }

@@ -50,7 +50,7 @@ for pkl in "$STUBS"/ABTests/*.pkl; do
   generate "$pkl" "$OUTPUT_DIR/ABTests/ABTestsJsonStubs/${name}.json"
 done
 
-# --- Config (12 files, skip _SharedConfigData.pkl) ---
+# --- Config (skip _* base files) ---
 echo ""
 echo "=== Config ==="
 for pkl in "$STUBS"/Config/*.pkl; do

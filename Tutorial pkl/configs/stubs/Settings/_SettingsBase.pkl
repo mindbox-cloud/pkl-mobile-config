@@ -1,0 +1,12 @@
+amends "../../../templates/SettingsTemplate.pkl"
+
+settings {
+  slidingExpiration {
+    config = "0.00:00:23"
+  }
+  inapp {
+    maxInappsPerSession = 1
+    maxInappsPerDay = 1
+    minIntervalBetweenShows = "0.00:00:10"
+  }
+}

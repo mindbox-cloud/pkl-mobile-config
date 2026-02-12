@@ -1,5 +1,4 @@
 {
-  "inapps": 1,
   "monitoring": {
     "logs": [
       {
@@ -32,9 +31,19 @@
       "inapps": "1.00:00:00"
     },
     "slidingExpiration": {
-      "config": "0.00:00:23"
+      "config": "0.00:00:23",
+      "pushTokenKeepalive": "14.00:00:00"
+    },
+    "inapp": {
+      "maxInappsPerSession": 3,
+      "maxInappsPerDay": 50,
+      "minIntervalBetweenShows": "00:00:10"
+    },
+    "featureToggles": {
+      "MobileSdkShouldSendInAppShowError": false
     }
   },
+  "inapps": 1,
   "abtests": [
     {
       "id": "94CD824A-59AA-4937-9E0E-089895A0DB6F",

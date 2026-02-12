@@ -1,8 +1,53 @@
 {
-  "abtests": 1,
+  "monitoring": {
+    "logs": [
+      {
+        "requestId": "bb978cd7-ce4c-4239-a5d2-4b7e5d4fb5b9",
+        "deviceUUID": "216e6225-3170-4089-a6f0-3d1ed8f64153",
+        "from": "2024-02-12T10:00:00",
+        "to": "2024-02-14T20:30:00"
+      },
+      {
+        "requestId": "8e829a63-a5c3-4e1c-a772-41fd61f8f331",
+        "deviceUUID": "126e6225-3170-4089-a6f0-3d1ed8f64153",
+        "from": "2023-02-10T00:00:00",
+        "to": "2023-03-01T20:30:00"
+      }
+    ]
+  },
+  "settings": {
+    "operations": {
+      "viewProduct": {
+        "systemName": "ViewProduct"
+      },
+      "viewCategory": {
+        "systemName": "ViewCategory"
+      },
+      "setCart": {
+        "systemName": "SetCart"
+      }
+    },
+    "ttl": {
+      "inapps": "1.00:00:00"
+    },
+    "slidingExpiration": {
+      "config": "0.00:00:23",
+      "pushTokenKeepalive": "14.00:00:00"
+    },
+    "inapp": {
+      "maxInappsPerSession": 3,
+      "maxInappsPerDay": 50,
+      "minIntervalBetweenShows": "00:00:10"
+    },
+    "featureToggles": {
+      "MobileSdkShouldSendInAppShowError": false
+    }
+  },
   "inapps": [
     {
       "id": "12345678-c777-4ac9-86b3-722c3e998cb6",
+      "isPriority": null,
+      "delayTime": null,
       "sdkVersion": {
         "min": 8,
         "max": null
@@ -28,8 +73,8 @@
                   {
                     "action": {
                       "intentPayload": "Some payload test",
-                      "value": "",
-                      "$type": "redirectUrl"
+                      "$type": "redirectUrl",
+                      "value": ""
                     },
                     "source": {
                       "value": "https://www.akusherstvo.ru/images/uploadfoto/events/in-app/in-app-app300-2.png",
@@ -84,6 +129,8 @@
     },
     {
       "id": "283d926e-7609-493b-8d1d-67e9a909847e",
+      "isPriority": null,
+      "delayTime": null,
       "sdkVersion": {
         "min": 9,
         "max": null
@@ -152,6 +199,8 @@
     },
     {
       "id": "4c7ee36b-e439-452a-b76a-3908f30766db",
+      "isPriority": null,
+      "delayTime": null,
       "sdkVersion": {
         "min": 8,
         "max": null
@@ -177,8 +226,8 @@
                   {
                     "action": {
                       "intentPayload": "",
-                      "value": "https://www.forrestgerke.com/shop/apple-3x4-linoleum-block-print",
-                      "$type": "redirectUrl"
+                      "$type": "redirectUrl",
+                      "value": "https://www.forrestgerke.com/shop/apple-3x4-linoleum-block-print"
                     },
                     "source": {
                       "value": "https://images.squarespace-cdn.com/content/v1/524cb77be4b0bf732ffea906/1597867591991-JG1UEAX03TOY6EK76MEG/Apple+-+Product+Image.jpg",
@@ -213,6 +262,8 @@
     },
     {
       "id": "c68d2f2a-d3f6-40ef-b300-4597cced3453",
+      "isPriority": null,
+      "delayTime": null,
       "sdkVersion": {
         "min": 8,
         "max": null
@@ -238,8 +289,8 @@
                   {
                     "action": {
                       "intentPayload": "Some payload test",
-                      "value": "",
-                      "$type": "redirectUrl"
+                      "$type": "redirectUrl",
+                      "value": ""
                     },
                     "source": {
                       "value": "https://mobpush-images.mindbox.ru/Mpush-test/223/c41cd63a-fffb-49f9-afcf-58e213ddd677.png",
@@ -293,39 +344,5 @@
       }
     }
   ],
-  "monitoring": {
-    "logs": [
-      {
-        "requestId": "bb978cd7-ce4c-4239-a5d2-4b7e5d4fb5b9",
-        "deviceUUID": "216e6225-3170-4089-a6f0-3d1ed8f64153",
-        "from": "2024-02-12T10:00:00",
-        "to": "2024-02-14T20:30:00"
-      },
-      {
-        "requestId": "8e829a63-a5c3-4e1c-a772-41fd61f8f331",
-        "deviceUUID": "126e6225-3170-4089-a6f0-3d1ed8f64153",
-        "from": "2023-02-10T00:00:00",
-        "to": "2023-03-01T20:30:00"
-      }
-    ]
-  },
-  "settings": {
-    "operations": {
-      "viewProduct": {
-        "systemName": "ViewProduct"
-      },
-      "viewCategory": {
-        "systemName": "ViewCategory"
-      },
-      "setCart": {
-        "systemName": "SetCart"
-      }
-    },
-    "ttl": {
-      "inapps": "1.00:00:00"
-    },
-    "slidingExpiration": {
-      "config": "0.00:00:23"
-    }
-  }
+  "abtests": 1
 }

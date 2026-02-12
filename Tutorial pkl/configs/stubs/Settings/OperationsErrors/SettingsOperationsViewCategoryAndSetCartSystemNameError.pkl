@@ -1,9 +1,15 @@
-operations = new Dynamic {
-  viewProduct { systemName = "ViewProduct" }
-  viewCategory { systemNameTest = "ViewCategory" }
-  setCart { systemNameTest = "SetCart" }
+import "../_SettingsBase.pkl" as base
+
+local ops = base.settings.operations
+local newOps = new Dynamic {
+  viewProduct = ops.viewProduct
+  viewCategory = new Dynamic { systemNameTest = ops.viewCategory.systemName }
+  setCart = new Dynamic { systemNameTest = ops.setCart.systemName }
 }
-ttl { inapps = "1.00:00:00" }
-slidingExpiration = new Dynamic {
-  config = "0.00:00:23"
+
+output {
+  renderer = new JsonRenderer {}
+  value = base.settings.toMap()
+    .mapValues((key, value) -> if (key == "operations") newOps else value)
+    .toDynamic()
 }

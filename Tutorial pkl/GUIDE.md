@@ -6,6 +6,7 @@ JSON config generator for Mobile SDK using the [Pkl](https://pkl-lang.org/) lang
 
 ```
 templates/                                — type definitions and defaults
+  ConfigTemplate.pkl                      — full config with all sections and defaults
   SettingsTemplate.pkl                    — Settings, Operations, TTL, SlidingExpiration, etc.
   InAppsTemplate.pkl                      — InApp, targeting nodes, form variants
   MonitoringTemplate.pkl                  — Monitoring logs
@@ -18,6 +19,18 @@ configs/                                  — concrete configurations (working f
   SettingWithoutSetCartOperation.pkl       — settings without setCart
   SettingsWithoutOperations.pkl           — settings without operations
   ABTest.pkl                              — A/B tests
+configs/stubs/                              — test stubs (62 files)
+  Config/                                   — full config error stubs
+    _ConfigBase.pkl                         — base config for all Config stubs
+  Settings/                                 — settings error stubs
+    _SettingsBase.pkl                       — base for standard settings stubs
+    _SettingsInAppBase.pkl                  — base for InApp settings stubs
+    OperationsErrors/                       — operations field errors
+    TtlErrors/                              — TTL field errors
+    SlidingExpirationsError/                — sliding expiration errors
+    InappError/                             — inapp settings errors
+  Monitoring/                               — monitoring log errors
+  ABTests/                                  — A/B test errors
 ```
 
 ## Commands
@@ -47,14 +60,36 @@ pkl eval configs/Config.pkl -f plist
 
 ## Creating New Configs
 
-### New full config (monitoring + settings + inapps)
+### New full config (amends ConfigTemplate)
 
-Copy `configs/Config.pkl` and modify the data:
-```bash
-cp configs/Config.pkl configs/MyConfig.pkl
+Create a file in `configs/` that amends the config template. Only override what differs from defaults:
+
+```pkl
+amends "../templates/ConfigTemplate.pkl"
+
+// settings, abtests — taken from defaults (all fields included automatically)
+// abtests defaults to null
+
+monitoring {
+  logs {
+    new {
+      requestId = "your-uuid"
+      deviceUUID = "device-uuid"
+      from = "2024-01-01T00:00:00"
+      to = "2024-01-02T00:00:00"
+    }
+  }
+}
+
+// Override settings only if needed:
+settings {
+  operations {
+    setCart = null  // disable setCart
+  }
+}
 ```
 
-Then edit `configs/MyConfig.pkl` — change settings, point to a different InApps file, etc.
+Default config output includes all sections: `monitoring`, `settings` (with `operations`, `ttl`, `slidingExpiration`, `inapp`, `featureToggles`), `inapps`, `abtests`.
 
 ### New settings variant
 
@@ -178,6 +213,7 @@ Result: `(country OR region) AND segment`.
 | Variant | Purpose | Key fields |
 |---|---|---|
 | `ModalVariant` | Modal window | `content` (background + elements), `imageUrl`, `redirectUrl`, `intentPayload` |
+| `SnackbarVariant` | Snackbar | `content` (background + position + elements), `imageUrl`, `redirectUrl`, `intentPayload` |
 | `SimpleImageVariant` | Simple image | `imageUrl`, `redirectUrl`, `intentPayload` |
 
 ## Settings
@@ -195,3 +231,80 @@ Default values (defined in `templates/SettingsTemplate.pkl`):
 | `featureToggles.MobileSdkShouldSendInAppShowError` | `false` |
 
 TimeSpan format: `[-][d.]hh:mm:ss[.fffffff]` (C# TimeSpan).
+
+## Test Stubs
+
+62 Pkl stubs generate JSON for SDK parsing tests. All stubs inherit defaults from templates, so adding a new section (e.g. `featureToggles`) automatically appears in all generated JSON.
+
+**Generate all stubs:**
+```bash
+bash generate.sh
+```
+
+### Stub Architecture
+
+Stubs inherit from base configs via `amends` or `import`:
+- **Valid stubs** — `amends "_ConfigBase.pkl"` (inherit everything)
+- **Error stubs** — `import "_ConfigBase.pkl" as base` + programmatic transforms
+
+### Error Generation Patterns
+
+All patterns use `toMap()` to convert typed objects, transform them, then `toDynamic()` for JSON output.
+
+**Rename a key:**
+```pkl
+import "_ConfigBase.pkl" as base
+
+output {
+  renderer = new JsonRenderer { omitNullProperties = false }
+  value = base.configMap.toMap()
+    .mapKeys((key, _) -> if (key == "abtests") "abtestsTest" else key)
+    .toDynamic()
+}
+```
+
+**Replace a value with wrong type:**
+```pkl
+import "../_SettingsInAppBase.pkl" as base
+
+output {
+  renderer = new JsonRenderer {}
+  value = base.settings.toMap()
+    .mapValues((key, value) -> if (key == "inapp") 123 else value)
+    .toDynamic()
+}
+```
+
+**Remove a key (missing field):**
+```pkl
+import "../_SettingsInAppBase.pkl" as base
+
+output {
+  renderer = new JsonRenderer {}
+  value = base.settings.toMap()
+    .mapValues((key, value) ->
+      if (key == "inapp") value.toMap().filter((k, _) -> k != "maxInappsPerDay").toDynamic()
+      else value
+    )
+    .toDynamic()
+}
+```
+
+**Transform a specific element in a Listing:**
+```pkl
+import "../../../templates/MonitoringTemplate.pkl"
+
+logs = new Listing {
+  MonitoringTemplate.logs[0].toMap()
+    .mapKeys((key, _) -> if (key == "requestId") "request" else key)
+    .toDynamic()
+  MonitoringTemplate.logs[1]
+}
+```
+
+### Adding New Sections
+
+When you add a new section to a template (e.g. a new field in `SettingsTemplate.Settings`):
+1. All valid stubs automatically include the new section in JSON output
+2. Error stubs that use `toMap()` transforms also include it automatically
+3. No manual updates to individual stubs needed

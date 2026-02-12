@@ -17,5 +17,8 @@
     "config": "0.00:00:10",
     "pushTokenKeepalive": "0.00:00:10"
   },
-  "inapp": 123
+  "inapp": 123,
+  "featureToggles": {
+    "MobileSdkShouldSendInAppShowError": false
+  }
 }

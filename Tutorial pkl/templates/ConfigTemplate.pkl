@@ -1,0 +1,35 @@
+open module ConfigTemplate
+
+import "SettingsTemplate.pkl"
+import "MonitoringTemplate.pkl"
+import "InAppsTemplate.pkl"
+import "ABTestsTemplate.pkl"
+
+output {
+  renderer = new JsonRenderer { omitNullProperties = false }
+}
+
+class Monitoring {
+  logs: Listing<MonitoringTemplate.Log>
+}
+
+monitoring: Monitoring = new { logs {} }
+
+settings: SettingsTemplate.Settings = new {
+  operations {
+    viewProduct { systemName = "ViewProduct" }
+    viewCategory { systemName = "ViewCategory" }
+    setCart { systemName = "SetCart" }
+  }
+}
+
+inapps: Listing<InAppsTemplate.InApp> = new {}
+
+abtests: Listing<ABTestsTemplate.ABTest>? = null
+
+hidden configMap: Mapping<String, unknown> = new {
+  ["monitoring"] = monitoring
+  ["settings"] = settings
+  ["inapps"] = inapps
+  ["abtests"] = abtests
+}

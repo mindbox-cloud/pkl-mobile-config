@@ -1,1 +1,3 @@
+import "../../../templates/MonitoringTemplate.pkl"
+
 logs = 1

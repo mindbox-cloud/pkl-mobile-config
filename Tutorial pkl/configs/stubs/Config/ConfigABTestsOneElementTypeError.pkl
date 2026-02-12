@@ -1,10 +1,16 @@
-import "_SharedConfigData.pkl"
+import "_ConfigBase.pkl" as base
+import "../../../templates/ABTestsTemplate.pkl"
+
+local fixedAbtests = new Listing {
+  ABTestsTemplate.abtests[0].toMap()
+    .mapValues((key, value) -> if (key == "variants") 1 else value)
+    .toDynamic()
+  ABTestsTemplate.abtests[1]
+}
 
 output {
   renderer = new JsonRenderer { omitNullProperties = false }
+  value = base.configMap.toMap()
+    .mapValues((key, value) -> if (key == "abtests") fixedAbtests else value)
+    .toDynamic()
 }
-
-abtests = _SharedConfigData.configAbtestsWithVariantsTypeError
-inapps = _SharedConfigData.configInapps
-monitoring = _SharedConfigData.configMonitoring
-settings = _SharedConfigData.configSettings

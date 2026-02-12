@@ -1,4 +1,4 @@
-module Monitoring
+open module Monitoring
 
 typealias GUID = String
 typealias Date = String

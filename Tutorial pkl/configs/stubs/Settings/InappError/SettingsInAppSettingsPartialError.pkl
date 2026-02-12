@@ -1,15 +1,14 @@
-operations = new Dynamic {
-  viewProduct { systemName = "ProductView" }
-  viewCategory { systemName = "CategoryView" }
-  setCart { systemName = "SetCart" }
-}
-ttl { inapps = "0.00:00:10" }
-slidingExpiration = new Dynamic {
-  config = "0.00:00:10"
-  pushTokenKeepalive = "0.00:00:10"
-}
-inapp = new Dynamic {
+import "../_SettingsInAppBase.pkl" as base
+
+local brokenInapp = new Dynamic {
   maxInappsPerSession = 1
   maxInappsPerDay = "invalid"
   minIntervalBetweenShowsTest = "0.00:00:10"
+}
+
+output {
+  renderer = new JsonRenderer {}
+  value = base.settings.toMap()
+    .mapValues((key, value) -> if (key == "inapp") brokenInapp else value)
+    .toDynamic()
 }

@@ -20,5 +20,8 @@
   "inapp": {
     "maxInappsPerSession": 1,
     "maxInappsPerDay": 1
+  },
+  "featureToggles": {
+    "MobileSdkShouldSendInAppShowError": false
   }
 }

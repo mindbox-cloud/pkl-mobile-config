@@ -1,14 +1,11 @@
-operations = new Dynamic {
-  viewProduct { systemName = "ProductView" }
-  viewCategory { systemName = "CategoryView" }
-  setCart { systemName = "SetCart" }
-}
-ttl { inapps = "0.00:00:10" }
-slidingExpiration = new Dynamic {
-  config = "0.00:00:10"
-  pushTokenKeepalive = "0.00:00:10"
-}
-inapp = new Dynamic {
-  maxInappsPerDay = 1
-  minIntervalBetweenShows = "0.00:00:10"
+import "../_SettingsInAppBase.pkl" as base
+
+output {
+  renderer = new JsonRenderer {}
+  value = base.settings.toMap()
+    .mapValues((key, value) ->
+      if (key == "inapp") value.toMap().filter((k, _) -> k != "maxInappsPerSession").toDynamic()
+      else value
+    )
+    .toDynamic()
 }

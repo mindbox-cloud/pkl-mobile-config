@@ -1,10 +1,8 @@
-import "_SharedConfigData.pkl"
+import "_ConfigBase.pkl" as base
 
 output {
   renderer = new JsonRenderer { omitNullProperties = false }
+  value = base.configMap.toMap()
+    .mapValues((key, value) -> if (key == "abtests") 1 else value)
+    .toDynamic()
 }
-
-abtests = 1
-inapps = _SharedConfigData.configInapps
-monitoring = _SharedConfigData.configMonitoring
-settings = _SharedConfigData.configSettings
