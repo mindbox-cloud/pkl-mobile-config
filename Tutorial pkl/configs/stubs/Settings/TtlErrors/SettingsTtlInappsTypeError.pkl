@@ -4,7 +4,7 @@ output {
   renderer = new JsonRenderer {}
   value = base.settings.toMap()
     .mapValues((key, value) ->
-      if (key == "ttl") new Dynamic { inapps = 123 }
+      if (key == "ttl") value.toMap().mapValues((k, v) -> if (k == "inapps") 123 else v).toDynamic()
       else value
     )
     .toDynamic()

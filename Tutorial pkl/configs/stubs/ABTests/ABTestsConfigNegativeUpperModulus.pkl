@@ -4,7 +4,9 @@ local ab0 = ABTestsTemplate.abtests[0]
 local variants0 = ab0.variants
 local newVariant0 = variants0[0].toMap()
   .mapValues((key, value) ->
-    if (key == "modulus") new Dynamic { lower = 0; upper = -50 }
+    if (key == "modulus") value.toMap()
+      .mapValues((k, v) -> if (k == "upper") -50 else v)
+      .toDynamic()
     else value
   )
   .toDynamic()

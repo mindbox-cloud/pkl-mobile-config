@@ -1,14 +1,14 @@
 import "../_SettingsInAppBase.pkl" as base
 
-local brokenInapp = new Dynamic {
-  maxInappsPerSession = 1
-  maxInappsPerDay = "invalid"
-  minIntervalBetweenShowsTest = "0.00:00:10"
-}
-
 output {
   renderer = new JsonRenderer {}
   value = base.settings.toMap()
-    .mapValues((key, value) -> if (key == "inapp") brokenInapp else value)
+    .mapValues((key, value) ->
+      if (key == "inapp") value.toMap()
+        .mapValues((k, v) -> if (k == "maxInappsPerDay") "invalid" else v)
+        .mapKeys((k, _) -> if (k == "minIntervalBetweenShows") "minIntervalBetweenShowsTest" else k)
+        .toDynamic()
+      else value
+    )
     .toDynamic()
 }

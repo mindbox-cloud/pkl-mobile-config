@@ -1,11 +1,12 @@
 import "../_SettingsBase.pkl" as base
 
-local ops = base.settings.operations
-local newOps = new Dynamic {
-  viewProduct = ops.viewProduct
-  viewCategory = new Dynamic { systemNameTest = ops.viewCategory.systemName }
-  setCart = new Dynamic { systemNameTest = ops.setCart.systemName }
-}
+local newOps = base.settings.operations.toMap()
+  .mapValues((key, value) ->
+    if (key == "viewCategory" || key == "setCart")
+      value.toMap().mapKeys((k, _) -> if (k == "systemName") "systemNameTest" else k).toDynamic()
+    else value
+  )
+  .toDynamic()
 
 output {
   renderer = new JsonRenderer {}

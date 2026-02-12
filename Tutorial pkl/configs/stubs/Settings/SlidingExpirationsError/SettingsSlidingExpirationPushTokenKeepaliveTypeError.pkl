@@ -4,8 +4,14 @@ output {
   renderer = new JsonRenderer {}
   value = base.settings.toMap()
     .mapValues((key, value) ->
-      if (key == "ttl") new Dynamic { inapps = "2.00:00:00" }
-      else if (key == "slidingExpiration") new Dynamic { config = "2.00:00:00"; pushTokenKeepalive = 123 }
+      if (key == "ttl") value.toMap().mapValues((k, v) -> if (k == "inapps") "2.00:00:00" else v).toDynamic()
+      else if (key == "slidingExpiration") value.toMap()
+        .mapValues((k, v) ->
+          if (k == "config") "2.00:00:00"
+          else if (k == "pushTokenKeepalive") 123
+          else v
+        )
+        .toDynamic()
       else value
     )
     .toDynamic()

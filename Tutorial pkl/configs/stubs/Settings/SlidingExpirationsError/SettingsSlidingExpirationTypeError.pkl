@@ -4,7 +4,7 @@ output {
   renderer = new JsonRenderer {}
   value = base.settings.toMap()
     .mapValues((key, value) ->
-      if (key == "ttl") new Dynamic { inapps = "2.00:00:00" }
+      if (key == "ttl") value.toMap().mapValues((k, v) -> if (k == "inapps") "2.00:00:00" else v).toDynamic()
       else if (key == "slidingExpiration") 123
       else value
     )
