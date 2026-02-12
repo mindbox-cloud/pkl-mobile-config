@@ -1,0 +1,25 @@
+import "../templates/SettingsTemplate.pkl"
+import "../templates/MonitoringTemplate.pkl"
+import "InApps.pkl"
+
+class Monitoring {
+  logs: Listing<MonitoringTemplate.Log>
+}
+
+monitoring: Monitoring = new {
+  logs {}
+}
+
+settings = new SettingsTemplate.Settings {
+  operations {
+    viewProduct {
+      systemName = "viewProduct"
+    }
+    viewCategory {
+      systemName = "viewCategory"
+    }
+    setCart = null
+  }
+}
+
+inapps = InApps.inapps

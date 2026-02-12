@@ -1,4 +1,4 @@
-amends "SettingsTemplate.pkl"
+amends "../templates/SettingsTemplate.pkl"
 
 settings {
   operations {

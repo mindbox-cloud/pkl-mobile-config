@@ -1,0 +1,3 @@
+amends "../templates/SettingsTemplate.pkl"
+
+settings {}

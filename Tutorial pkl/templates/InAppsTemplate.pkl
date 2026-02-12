@@ -1,0 +1,206 @@
+open module InAppsTemplate
+
+import "SettingsTemplate.pkl"
+
+typealias TimeSpan = SettingsTemplate.TimeSpan
+
+// --- SDK Version ---
+
+class SDKVersion {
+  min: Int
+  max: Int?
+}
+
+// --- Frequency ---
+
+class Frequency {
+  kind: String
+  $type: String
+}
+
+// --- Targeting Nodes ---
+
+open class TargetingNode {}
+
+/// Always returns true
+class TrueNode extends TargetingNode {
+  $type: String = "true"
+}
+
+/// Matches API method call by systemName
+class ApiMethodCallNode extends TargetingNode {
+  internalId: String?
+  systemName: String
+  $type: String = "apiMethodCall"
+}
+
+/// Matches visit count
+class VisitNode extends TargetingNode {
+  kind: String
+  value: Int
+  $type: String = "visit"
+}
+
+/// Matches product ID by string comparison
+class ViewProductIdNode extends TargetingNode {
+  kind: "substring"|"notSubstring"|"startsWith"|"endsWith"
+  value: String
+  $type: String = "viewProductId"
+}
+
+/// Matches product category ID by string comparison
+class ViewProductCategoryIdNode extends TargetingNode {
+  kind: "substring"|"notSubstring"|"startsWith"|"endsWith"
+  value: String
+  $type: String = "viewProductCategoryId"
+}
+
+/// Matches product category ID by inclusion in a set
+class ViewProductCategoryIdInNode extends TargetingNode {
+  kind: "any"|"none"
+  valuee: Listing<String>
+  $type: String = "viewProductCategoryIdIn"
+}
+
+/// Matches customer segment
+class SegmentNode extends TargetingNode {
+  kind: "negative"|"positive"
+  segmentationInternalId: String
+  segmentationExternalId: String
+  segmentExternalId: String
+  $type: String = "segment"
+}
+
+/// Matches product segment
+class ViewProductSegmentNode extends TargetingNode {
+  kind: "negative"|"positive"
+  segmentationInternalId: String
+  segmentationExternalId: String
+  segmentExternalId: String
+  $type: String = "viewProductSegment"
+}
+
+/// Matches country by geo IDs
+class CountryNode extends TargetingNode {
+  kind: "negative"|"positive"
+  ids: Listing<Int>
+  $type: String = "country"
+}
+
+/// Matches region by geo IDs
+class RegionNode extends TargetingNode {
+  kind: "negative"|"positive"
+  ids: Listing<Int>
+  $type: String = "region"
+}
+
+/// Matches city by geo IDs
+class CityNode extends TargetingNode {
+  kind: "negative"|"positive"
+  ids: Listing<Int>
+  $type: String = "city"
+}
+
+// --- Targeting (can be nested as a node) ---
+
+class Targeting extends TargetingNode {
+  nodes: Listing<TargetingNode>
+  $type: "and"|"or"
+}
+
+// --- Form: Background Layer ---
+
+class ImageAction {
+  intentPayload: String
+  value: String
+  $type: String
+}
+
+class ImageSource {
+  value: String
+  $type: String
+}
+
+class BackgroundLayer {
+  action: ImageAction
+  source: ImageSource
+  $type: String
+}
+
+class Background {
+  layers: Listing<BackgroundLayer>
+}
+
+// --- Form: Close Button & Elements ---
+
+class Size {
+  kind: String
+  width: Number
+  height: Number
+}
+
+class Margin {
+  kind: String
+  top: Number
+  right: Number
+  left: Number
+  bottom: Number
+}
+
+class Position {
+  margin: Margin
+}
+
+class CloseButton {
+  color: String
+  lineWidth: Int
+  size: Size
+  position: Position
+  $type: String = "closeButton"
+}
+
+// --- Form: Modal Content ---
+
+class ModalContent {
+  background: Background
+  elements: Listing<CloseButton>
+}
+
+// --- Form Variants ---
+
+open class FormVariant {}
+
+class ModalVariant extends FormVariant {
+  content: ModalContent
+  imageUrl: String
+  redirectUrl: String
+  intentPayload: String
+  $type: String = "modal"
+}
+
+class SimpleImageVariant extends FormVariant {
+  imageUrl: String
+  redirectUrl: String
+  intentPayload: String
+  $type: String = "simpleImage"
+}
+
+// --- Form ---
+
+class Form {
+  variants: Listing<FormVariant>
+}
+
+// --- InApp ---
+
+class InApp {
+  id: String
+  isPriority: Boolean?
+  delayTime: TimeSpan?
+  sdkVersion: SDKVersion
+  frequency: Frequency
+  targeting: Targeting
+  form: Form
+}
+
+inapps: Listing<InApp>

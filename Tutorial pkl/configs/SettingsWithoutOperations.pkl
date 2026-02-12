@@ -1,0 +1,5 @@
+amends "../templates/SettingsTemplate.pkl"
+
+settings {
+  operations = null
+}

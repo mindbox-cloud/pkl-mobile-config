@@ -1,3 +1,0 @@
-amends "MonitoringTemplate.pkl"
-
-logs {}

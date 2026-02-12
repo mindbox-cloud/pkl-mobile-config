@@ -1,4 +1,4 @@
-amends "ABTestsTemplate.pkl"
+amends "../templates/ABTestsTemplate.pkl"
 
 abtests {
   new {

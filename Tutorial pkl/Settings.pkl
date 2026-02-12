@@ -1,3 +1,0 @@
-amends "SettingsTemplate.pkl"
-
-settings {}

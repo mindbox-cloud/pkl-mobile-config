@@ -17,13 +17,26 @@ class TTL {
 }
 
 class SlidingExpiration {
-  config: TimeSpan = "0.00:30:00"
+  config: TimeSpan = "00:30:00"
+  pushTokenKeepalive: TimeSpan = "14.00:00:00"
+}
+
+class InAppSettings {
+  maxInappsPerSession: Int = 3
+  maxInappsPerDay: Int = 50
+  minIntervalBetweenShows: TimeSpan = "00:00:10"
+}
+
+class FeatureToggles {
+  MobileSdkShouldSendInAppShowError: Boolean = false
 }
 
 class Settings {
   operations: Operations?
   ttl: TTL
   slidingExpiration: SlidingExpiration
+  inapp: InAppSettings
+  featureToggles: FeatureToggles
 }
 
 settings: Settings = new {
