@@ -1,0 +1,57 @@
+amends "Workshop.pkl"
+
+title = "Pkl: Configure your Systems in New Ways"
+interactive = true
+seats = 100
+occupancy = 0.85
+duration = 1.5.h
+`abstract` = """
+  With more systems to configure, the software industry is drowning in repetitive and brittle configuration files.
+  YAML and other configuration formats have been turned into programming languages against their will.
+  Unsurprisingly, they don’t live up to the task.
+  Pkl puts you back in control.
+  """
+
+event {
+  name = "Migrating Birds between hemispheres"
+  year = 2024
+}
+
+instructors {
+  "Kate Sparrow"
+  "Jerome Owl"
+}
+
+sessions {
+  new {
+    date = "2/1/2024"
+    time = 30.min
+  }
+  new {
+    date = "2/1/2024"
+    time = 30.min
+  }
+}
+
+assistants {
+  ["kevin"] = "Kevin Parrot"
+  ["betty"] = "Betty Harrier"
+}
+
+agenda {
+  ["beginners"] {
+    name = "Basic Configuration"
+    part = 1
+    duration = 45.min
+  }
+  ["intermediates"] {
+    name = "Filling out a Template"
+    part = 2
+    duration = 45.min
+  }
+  ["experts"] {
+    name = "Writing a Template"
+    part = 3
+    duration = 45.min
+  }
+}

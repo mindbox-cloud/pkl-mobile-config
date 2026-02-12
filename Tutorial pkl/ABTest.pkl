@@ -1,0 +1,46 @@
+amends "ABTestsTemplate.pkl"
+
+abtests {
+  new {
+    id = "94CD824A-59AA-4937-9E0E-089895A0DB6F"
+    sdkVersion {
+      min = 7
+      max = null
+    }
+    salt = "7D4154FD-A6D4-4BBD-B058-7150FAC18AE1"
+    variants {
+      new {
+        id = "80FD90DA-D5EB-47C0-82E0-2683EF4CB9C1"
+        modulus {
+          lower = 0
+          upper = 50
+        }
+        objects {
+          new {
+            kind = "concrete"
+            inapps {
+              "210adb81-c777-4ac9-86b3-722c3e998cb6"
+            }
+            $type = "inapps"
+          }
+        }
+      }
+      new {
+        id = "9B15D2FC-3C18-44E7-B804-18AA0248706A"
+        modulus {
+          lower = 50
+          upper = 100
+        }
+        objects {
+          new {
+            kind = "concrete"
+            inapps {
+              "c68d2f2a-d3f6-40ef-b300-4597cced3453"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

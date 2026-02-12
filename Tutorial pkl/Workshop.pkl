@@ -1,0 +1,37 @@
+module Workshop
+
+import "TutorialPart.pkl"
+
+title: String
+
+interactive: Boolean
+
+seats: Int
+
+occupancy: Float
+
+duration: Duration
+
+`abstract`: String
+
+class Event {
+  name: String
+
+  year: Int
+}
+
+event: Event
+
+instructors: Listing<String>
+
+class Session {
+  time: Duration
+
+  date: String
+}
+
+sessions: Listing<Session>
+
+assistants: Mapping<String, String>
+
+agenda: Mapping<String, TutorialPart>

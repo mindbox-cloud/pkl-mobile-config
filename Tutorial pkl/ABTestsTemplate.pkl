@@ -1,0 +1,32 @@
+module ABTestsTemplate
+
+class SDKVersion {
+  min: Int
+  max: Int?
+}
+
+class Modulus {
+  lower: Int
+  upper: Int
+}
+
+class Object {
+  kind: "all" | "concrete"
+  inapps: Listing<String>
+  $type: "inapps"
+}
+
+class Variant {
+  id: String
+  modulus: Modulus
+  objects: Listing<Object>
+}
+
+class ABTest {
+  id: String
+  sdkVersion: SDKVersion
+  salt: String
+  variants: Listing<Variant>
+}
+
+abtests: Listing<ABTest>

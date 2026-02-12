@@ -1,0 +1,12 @@
+import "SettingsTemplate.pkl"
+import "SettingsWithoutOperations.pkl"
+import "MonitoringTemplate.pkl"
+import "ABTest.pkl"
+
+
+// local test = "Test"
+// settings = SettingsTemplate.settings.toMap().mapKeys((key, _) -> if (key == "operations") key + test else key).toMapping()
+
+settings = SettingsTemplate.settings
+logs = MonitoringTemplate.logs
+abtests = ABTest.abtests

@@ -1,0 +1,3 @@
+amends "MonitoringTemplate.pkl"
+
+logs {}
