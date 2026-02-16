@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   generate:
@@ -19,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Install pkl (latest)
         run: |
@@ -32,14 +33,40 @@ jobs:
       - name: Run generate.sh
         run: ./generate.sh
 
-      - name: Commit generated files
+      - name: Create PR with generated files
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
           git add output/
           if git diff --cached --quiet; then
-            echo "No changes in generated files"
+            echo "No changes in generated files — nothing to do"
+            exit 0
+          fi
+
+          SOURCE_BRANCH="${{ github.head_ref }}"
+          GEN_BRANCH="generated/${SOURCE_BRANCH}"
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+
+          git checkout -B "$GEN_BRANCH"
+          git commit -m "chore: regenerate JSON stubs for #${PR_NUMBER}"
+          git push --force origin "$GEN_BRANCH"
+
+          EXISTING_PR=$(gh pr list --head "$GEN_BRANCH" --base "$SOURCE_BRANCH" --json number --jq '.[0].number // empty')
+
+          if [ -n "$EXISTING_PR" ]; then
+            echo "PR #${EXISTING_PR} already exists — updated via force push"
           else
-            git commit -m "chore: regenerate JSON stubs"
-            git push
+            gh pr create \
+              --head "$GEN_BRANCH" \
+              --base "$SOURCE_BRANCH" \
+              --title "chore: regenerate JSON stubs for #${PR_NUMBER}" \
+              --body "$(cat <<EOF
+          Auto-generated JSON stubs from PR #${PR_NUMBER}.
+
+          Merge this PR into \`${SOURCE_BRANCH}\` before merging #${PR_NUMBER} into \`main\`.
+          EOF
+              )"
           fi
