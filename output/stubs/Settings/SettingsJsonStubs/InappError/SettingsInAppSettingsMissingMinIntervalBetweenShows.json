@@ -22,6 +22,6 @@
     "maxInappsPerDay": 1
   },
   "featureToggles": {
-    "MobileSdkShouldSendInAppShowError": false
+    "MobileSdkShouldSendInAppShowError": true
   }
 }

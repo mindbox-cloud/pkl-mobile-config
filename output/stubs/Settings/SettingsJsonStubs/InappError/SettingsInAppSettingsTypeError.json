@@ -19,6 +19,6 @@
   },
   "inapp": 123,
   "featureToggles": {
-    "MobileSdkShouldSendInAppShowError": false
+    "MobileSdkShouldSendInAppShowError": true
   }
 }
