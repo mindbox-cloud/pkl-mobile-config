@@ -28,7 +28,7 @@ class InAppSettings {
 }
 
 class FeatureToggles {
-  MobileSdkShouldSendInAppShowError: Boolean = false
+  MobileSdkShouldSendInAppShowError: Boolean = true
 }
 
 class Settings {
