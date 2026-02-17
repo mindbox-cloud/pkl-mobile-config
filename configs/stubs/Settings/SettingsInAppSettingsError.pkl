@@ -1,8 +1,0 @@
-import "_SettingsInAppBase.pkl" as base
-
-output {
-  renderer = new JsonRenderer {}
-  value = base.settings.toMap()
-    .mapKeys((key, _) -> if (key == "inapp") "inappTest" else key)
-    .toDynamic()
-}
