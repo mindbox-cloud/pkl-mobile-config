@@ -12,6 +12,12 @@ TOTAL=0
 
 echo "Generating JSON stubs to: $OUTPUT_DIR"
 
+# Clean previous output to avoid stale files
+if [ -d "$OUTPUT_DIR" ]; then
+  echo "Cleaning previous output..."
+  rm -rf "$OUTPUT_DIR"
+fi
+
 generate() {
   local pkl_file="$1"
   local out_dir="$2"
