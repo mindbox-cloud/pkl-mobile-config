@@ -1,0 +1,33 @@
+output {
+  renderer = new JsonRenderer { omitNullProperties = false }
+}
+
+inapps = new Listing {
+  new Dynamic {
+    id = "webview-inapp-id"
+    sdkVersion { min = 9; max = null }
+    frequency { kind = "lifetime"; $type = "once" }
+    targeting { nodes { new Dynamic { kind = "gte"; value = 2; $type = "visit" } }; $type = "and" }
+    form {
+      variants {
+        new Dynamic {
+          content {
+            background {
+              layers {
+                new Dynamic {
+                  baseUrl = "https://inapp.local/popup"
+                  contentUrl = "https://api-staging.mindbox.ru/mobile/byendpoint/webview/stable/inapp-dev-v2.html"
+                  params = 123 // Int instead of object — should cause layer decode to fail
+                  $type = "webview"
+                }
+              }
+            }
+            elements = null
+          }
+          imageUrl = ""; redirectUrl = ""; intentPayload = ""
+          $type = "modal"
+        }
+      }
+    }
+  }
+}

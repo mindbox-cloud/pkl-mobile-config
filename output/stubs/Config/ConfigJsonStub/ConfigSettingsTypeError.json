@@ -44,6 +44,7 @@
               "background": {
                 "layers": [
                   {
+                    "$type": "image",
                     "action": {
                       "intentPayload": "Some payload test",
                       "$type": "redirectUrl",
@@ -52,8 +53,7 @@
                     "source": {
                       "value": "https://www.akusherstvo.ru/images/uploadfoto/events/in-app/in-app-app300-2.png",
                       "$type": "url"
-                    },
-                    "$type": "image"
+                    }
                   }
                 ]
               },
@@ -128,6 +128,7 @@
               "background": {
                 "layers": [
                   {
+                    "$type": "image",
                     "action": {
                       "intentPayload": "Ñ‚ÐµÑÑ‚Ð¾Ð²Ñ‹Ð¹ Ð¿ÐµÐ¹Ð»Ð¾Ð°Ð´",
                       "$type": "pushPermission"
@@ -135,8 +136,7 @@
                     "source": {
                       "value": "https://inapps-stable.mindbox.ru/media/default-push-modal-ru.png",
                       "$type": "url"
-                    },
-                    "$type": "image"
+                    }
                   }
                 ]
               },
@@ -197,6 +197,7 @@
               "background": {
                 "layers": [
                   {
+                    "$type": "image",
                     "action": {
                       "intentPayload": "",
                       "$type": "redirectUrl",
@@ -205,8 +206,7 @@
                     "source": {
                       "value": "https://images.squarespace-cdn.com/content/v1/524cb77be4b0bf732ffea906/1597867591991-JG1UEAX03TOY6EK76MEG/Apple+-+Product+Image.jpg",
                       "$type": "url"
-                    },
-                    "$type": "image"
+                    }
                   }
                 ]
               },
@@ -260,6 +260,7 @@
               "background": {
                 "layers": [
                   {
+                    "$type": "image",
                     "action": {
                       "intentPayload": "Some payload test",
                       "$type": "redirectUrl",
@@ -268,8 +269,7 @@
                     "source": {
                       "value": "https://mobpush-images.mindbox.ru/Mpush-test/223/c41cd63a-fffb-49f9-afcf-58e213ddd677.png",
                       "$type": "url"
-                    },
-                    "$type": "image"
+                    }
                   }
                 ]
               },
