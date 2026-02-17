@@ -52,6 +52,7 @@ generate_dir() {
 # configs/stubs/Monitoring/           → Monitoring/MonitoringJsonStubs/
 # configs/stubs/ABTests/              → ABTests/ABTestsJsonStubs/
 # configs/stubs/Config/               → Config/ConfigJsonStub/
+# configs/stubs/InApp/                → InApp/InAppJsonStubs/
 # configs/stubs/Settings/SettingsConfig.pkl → Settings/SettingsJsonStubs/
 # configs/stubs/Settings/*.pkl (rest) → Settings/
 # configs/stubs/Settings/<subdir>/    → Settings/SettingsJsonStubs/<subdir>/
@@ -59,6 +60,7 @@ generate_dir() {
 generate_dir "$STUBS/Monitoring" "$OUTPUT_DIR/Monitoring/MonitoringJsonStubs" "Monitoring"
 generate_dir "$STUBS/ABTests"    "$OUTPUT_DIR/ABTests/ABTestsJsonStubs"      "ABTests"
 generate_dir "$STUBS/Config"     "$OUTPUT_DIR/Config/ConfigJsonStub"         "Config"
+generate_dir "$STUBS/InApp"      "$OUTPUT_DIR/InApp/InAppJsonStubs"          "InApp"
 
 # --- Settings: root-level files ---
 echo ""
