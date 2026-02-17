@@ -1,0 +1,20 @@
+output {
+  renderer = new JsonRenderer { omitNullProperties = false }
+}
+
+inapps = new Listing {
+  new Dynamic {
+    id = "test-valid-inapp-id"
+    sdkVersion { min = 8; max = null }
+    frequency { kind = "lifetime"; $type = "once" }
+    targeting { nodes { new Dynamic { $type = "true" } }; $type = "and" }
+    form {
+      variants {
+        new Dynamic {
+          $type = "unknownVariantType" // Unknown $type → .unknown case, InApp survives
+          imageUrl = ""; redirectUrl = ""; intentPayload = ""
+        }
+      }
+    }
+  }
+}

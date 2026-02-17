@@ -1,0 +1,31 @@
+output {
+  renderer = new JsonRenderer { omitNullProperties = false }
+}
+
+inapps = new Listing {
+  new Dynamic {
+    id = "test-valid-inapp-id"
+    sdkVersion { min = 8; max = null }
+    frequency { kind = "lifetime"; $type = "once" }
+    targeting { nodes { new Dynamic { $type = "true" } }; $type = "and" }
+    form {
+      variants {
+        new Dynamic {
+          // No $type field — CustomDecodingError → InApp skipped
+          content {
+            background {
+              layers {
+                new Dynamic {
+                  action { intentPayload = ""; value = ""; $type = "redirectUrl" }
+                  source { value = "https://example.com/image.png"; $type = "url" }
+                  $type = "image"
+                }
+              }
+            }
+          }
+          imageUrl = ""; redirectUrl = ""; intentPayload = ""
+        }
+      }
+    }
+  }
+}

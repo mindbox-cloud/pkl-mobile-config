@@ -1,0 +1,16 @@
+import "_InAppBase.pkl" as base
+
+local unknownFrequency = new Dynamic {
+  kind = "lifetime"
+  $type = "unknownFrequencyType"
+}
+
+output {
+  renderer = new JsonRenderer { omitNullProperties = false }
+}
+
+inapps = new Listing {
+  base.validInAppMap
+    .mapValues((key, value) -> if (key == "frequency") unknownFrequency else value)
+    .toDynamic()
+}

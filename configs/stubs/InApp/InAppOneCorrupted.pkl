@@ -1,0 +1,14 @@
+import "_InAppBase.pkl" as base
+
+output {
+  renderer = new JsonRenderer { omitNullProperties = false }
+}
+
+inapps = new Listing {
+  // Corrupted InApp: id key renamed → decode failure → skipped by FailableDecodableArray
+  base.validInAppMap
+    .mapKeys((key, _) -> if (key == "id") "idTest" else key)
+    .toDynamic()
+  // Valid InApp: should survive
+  base.validInApp
+}

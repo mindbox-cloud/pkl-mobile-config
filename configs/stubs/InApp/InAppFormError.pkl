@@ -1,0 +1,11 @@
+import "_InAppBase.pkl" as base
+
+output {
+  renderer = new JsonRenderer { omitNullProperties = false }
+}
+
+inapps = new Listing {
+  base.validInAppMap
+    .mapKeys((key, _) -> if (key == "form") "formTest" else key)
+    .toDynamic()
+}
