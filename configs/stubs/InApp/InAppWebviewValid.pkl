@@ -1,0 +1,49 @@
+import "../../../templates/InAppsTemplate.pkl"
+
+output {
+  renderer = new JsonRenderer { omitNullProperties = false }
+}
+
+inapps = new Listing {
+  new InAppsTemplate.InApp {
+    id = "webview-inapp-id"
+    sdkVersion { min = 9; max = null }
+    frequency { kind = "lifetime"; $type = "once" }
+    targeting {
+      nodes {
+        new InAppsTemplate.VisitNode { kind = "gte"; value = 2 }
+      }
+      $type = "and"
+    }
+    form {
+      variants {
+        new InAppsTemplate.ModalVariant {
+          content {
+            background {
+              layers {
+                new InAppsTemplate.WebviewBackgroundLayer {
+                  baseUrl = "https://inapp.local/popup"
+                  contentUrl = "https://api-staging.mindbox.ru/mobile/byendpoint/webview/stable/inapp-dev-v2.html"
+                  params = new Mapping {
+                    ["formId"] = "143364"
+                    ["popUpId"] = "143364"
+                    ["popUpEndpointId"] = "Mpush-test.inapp-quiz-migration"
+                    ["test"] = new Mapping { ["lalala"] = "123" }
+                    ["someObject"] = new Listing {
+                      new Mapping {
+                        ["lalala"] = 123
+                        ["blaBla"] = true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            elements = null
+          }
+          imageUrl = ""; redirectUrl = ""; intentPayload = ""
+        }
+      }
+    }
+  }
+}

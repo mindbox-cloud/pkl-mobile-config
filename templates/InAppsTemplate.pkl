@@ -132,15 +132,26 @@ class PushPermissionAction extends Action {
 
 // --- Form: Background Layer ---
 
+open class BackgroundLayer {
+  $type: String
+}
+
 class ImageSource {
   value: String
   $type: String
 }
 
-class BackgroundLayer {
+class ImageBackgroundLayer extends BackgroundLayer {
   action: Action
   source: ImageSource
-  $type: String
+  $type = "image"
+}
+
+class WebviewBackgroundLayer extends BackgroundLayer {
+  baseUrl: String
+  contentUrl: String
+  params: Mapping<String, unknown>?
+  $type = "webview"
 }
 
 class Background {
@@ -189,7 +200,7 @@ class ContentPosition {
 
 class ModalContent {
   background: Background
-  elements: Listing<CloseButton>
+  elements: Listing<CloseButton>?
 }
 
 class SnackbarContent {

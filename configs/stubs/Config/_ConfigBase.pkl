@@ -30,13 +30,12 @@ inapps {
           content {
             background {
               layers {
-                new {
+                new InAppsTemplate.ImageBackgroundLayer {
                   action = new InAppsTemplate.RedirectUrlAction {
                     intentPayload = "Some payload test"
                     value = ""
                   }
                   source { value = "https://www.akusherstvo.ru/images/uploadfoto/events/in-app/in-app-app300-2.png"; $type = "url" }
-                  $type = "image"
                 }
               }
             }
@@ -73,12 +72,11 @@ inapps {
           content {
             background {
               layers {
-                new {
+                new InAppsTemplate.ImageBackgroundLayer {
                   action = new InAppsTemplate.PushPermissionAction {
                     intentPayload = "Ñ‚ÐµÑÑ‚Ð¾Ð²Ñ‹Ð¹ Ð¿ÐµÐ¹Ð»Ð¾Ð°Ð´"
                   }
                   source { value = "https://inapps-stable.mindbox.ru/media/default-push-modal-ru.png"; $type = "url" }
-                  $type = "image"
                 }
               }
             }
@@ -111,13 +109,12 @@ inapps {
           content {
             background {
               layers {
-                new {
+                new InAppsTemplate.ImageBackgroundLayer {
                   action = new InAppsTemplate.RedirectUrlAction {
                     intentPayload = ""
                     value = "https://www.forrestgerke.com/shop/apple-3x4-linoleum-block-print"
                   }
                   source { value = "https://images.squarespace-cdn.com/content/v1/524cb77be4b0bf732ffea906/1597867591991-JG1UEAX03TOY6EK76MEG/Apple+-+Product+Image.jpg"; $type = "url" }
-                  $type = "image"
                 }
               }
             }
@@ -148,13 +145,12 @@ inapps {
           content {
             background {
               layers {
-                new {
+                new InAppsTemplate.ImageBackgroundLayer {
                   action = new InAppsTemplate.RedirectUrlAction {
                     intentPayload = "Some payload test"
                     value = ""
                   }
                   source { value = "https://mobpush-images.mindbox.ru/Mpush-test/223/c41cd63a-fffb-49f9-afcf-58e213ddd677.png"; $type = "url" }
-                  $type = "image"
                 }
               }
             }
