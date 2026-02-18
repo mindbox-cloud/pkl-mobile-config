@@ -1,0 +1,6 @@
+import "../_SettingsInAppBase.pkl" as base
+
+output {
+  renderer = new JsonRenderer {}
+  value = base.settings
+}

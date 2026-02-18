@@ -2,5 +2,9 @@ import "_SettingsBase.pkl" as base
 
 output {
   renderer = new JsonRenderer {}
-  value = base.settings
+  value = (base.settings) {
+    featureToggles {
+      MobileSdkShouldSendInAppShowError = true
+    }
+  }
 }

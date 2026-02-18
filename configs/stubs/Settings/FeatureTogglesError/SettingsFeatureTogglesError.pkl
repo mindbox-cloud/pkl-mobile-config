@@ -1,0 +1,14 @@
+import "../_SettingsInAppBase.pkl" as base
+
+output {
+  renderer = new JsonRenderer {}
+  value = base.settings.toMap()
+    .mapValues((key, value) ->
+      if (key == "featureToggles") value.toMap()
+        .mapValues((k, v) -> if (k == "MobileSdkShouldSendInAppShowError") true else v)
+        .toDynamic()
+      else value
+    )
+    .mapKeys((key, _) -> if (key == "featureToggles") "featureTogglesTest" else key)
+    .toDynamic()
+}
